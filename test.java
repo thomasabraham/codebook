@@ -1,16 +1,15 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 class TEST {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		while (sc.hasNext()) {
-			int i = sc.nextInt();
-			if (i == 42) {
-				break;
-			} else {
-				System.out.println(i);
-			}
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int input;
+		while ((input = Integer.parseInt(br.readLine())) != 42) {
+			System.out.println(input);
 		}
-		sc.close();
+		br.close();
 	}
 }
+
