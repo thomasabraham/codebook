@@ -28,25 +28,25 @@ class MAXCOUNT {
 		Integer arrayLength = Integer.parseInt(br.readLine());
 		List<Integer> arrayList = readArrayInLine(" ");
 		Map<Integer, Integer> countMap = new HashMap<>();
+		Integer smallestItem = Integer.MAX_VALUE;
+		Integer largestCount = 0;
 		for (Integer item : arrayList) {
+			Integer count = 0;
 			if (countMap.containsKey(item)) {
-				countMap.put(item, countMap.get(item) + 1);
+				count = countMap.get(item) + 1;
 			} else {
-				countMap.put(item, 1);
+				count = 1;
+			}
+			countMap.put(item, count);
+			if (largestCount < count) {
+				smallestItem = item;
+				largestCount = count;
+			} else if (largestCount == count && smallestItem > item) {
+				smallestItem = item;
+				largestCount = count;
 			}
 		}
-		Integer largestKey = Integer.MAX_VALUE;
-		Integer largestVal = 0;
-		for (Map.Entry<Integer, Integer> entry : countMap.entrySet()) {
-			if (largestVal < entry.getValue()) {
-				largestKey = entry.getKey();
-				largestVal = entry.getValue();
-			} else if (largestVal == entry.getValue() && largestKey > entry.getKey()) {
-				largestKey = entry.getKey();
-				largestVal = entry.getValue();
-			}
-		}
-		pw.println(largestKey + " " + largestVal);
+		pw.println(smallestItem + " " + largestCount);
 	}
 
 	private List<Integer> readArrayInLine(String seperator) throws IOException {
